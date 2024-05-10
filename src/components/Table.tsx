@@ -1,6 +1,6 @@
 const Table = () => {
   return (
-    <table className="text-black">
+    <table className="text-black border-2 w-[100%]">
       <tr>
         <th>Task Id</th>
         <th>Task Name</th>
