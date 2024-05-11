@@ -1,7 +1,7 @@
 import TaskList from "./partial/TaskList";
 
 const Table = () => {
-  let tasks_arr = ["Eat", "Code", "Sleep", "Repeat"];
+  let tasks_arr = [];
   return (
     <table className="text-black border-2 w-[100%]">
       <tbody>

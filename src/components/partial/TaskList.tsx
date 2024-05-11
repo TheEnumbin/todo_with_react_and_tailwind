@@ -4,8 +4,9 @@ const TaskList = ({ tasks }) => {
   console.log(tasks);
   return (
     <>
-      {tasks.map((item) => (
-        <tr>{item}</tr>
+      {tasks.length === 0 && <p className="text-center">No Item Found</p>}
+      {tasks.map((task) => (
+        <tr>{task}</tr>
       ))}
     </>
   );
