@@ -1,7 +1,14 @@
-const TaskList = (items) => {
-  console.log(items);
-  return <>{items.map((item, index) => ({ item }))}</>;
-  //   return [];
+import { Fragment } from "react";
+
+const TaskList = ({ tasks }) => {
+  console.log(tasks);
+  return (
+    <>
+      {tasks.map((item) => (
+        <tr>{item}</tr>
+      ))}
+    </>
+  );
 };
 
 export default TaskList;

@@ -1,9 +1,7 @@
 import TaskList from "./partial/TaskList";
 
 const Table = () => {
-  let tasks = ["Eat", "Code", "Sleep", "Repeat"];
-  // let tasks = "task";
-  console.log(typeof tasks);
+  let tasks_arr = ["Eat", "Code", "Sleep", "Repeat"];
   return (
     <table className="text-black border-2 w-[100%]">
       <tbody>
@@ -13,7 +11,7 @@ const Table = () => {
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <TaskList items={tasks}></TaskList>
+        <TaskList tasks={tasks_arr}></TaskList>
       </tbody>
     </table>
   );
