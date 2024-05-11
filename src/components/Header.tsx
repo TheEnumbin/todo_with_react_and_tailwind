@@ -1,10 +1,18 @@
-import { TotalItems, DoneItems, Undone } from "./partial/HeaderParts";
+import {
+  TotalItems,
+  DoneItems,
+  Undone,
+  CreateComponent,
+} from "./partial/HeaderParts";
 const Header = () => {
   return (
-    <div className="text-black flex flex-row gap-3 items-center justify-between">
-      <TotalItems></TotalItems>
-      <DoneItems></DoneItems>
-      <Undone></Undone>
+    <div>
+      <div className="text-black flex flex-row gap-3 items-center justify-between">
+        <TotalItems></TotalItems>
+        <DoneItems></DoneItems>
+        <Undone></Undone>
+      </div>
+      <CreateComponent></CreateComponent>
     </div>
   );
 };
