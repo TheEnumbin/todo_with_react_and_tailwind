@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 
 export const TotalItems = () => {
   return <div className="p-4 flex">Total Tasks: 10</div>;
@@ -13,11 +13,12 @@ export const Undone = () => {
 };
 
 export const CreateComponent = () => {
+  const [taskname, setName] = useState("");
   const handleInputChange = (event) => {
-    console.log(event.target.value);
+    setName(event.target.value);
   };
   const handleAdd = (event: MouseEvent) => {
-    console.log(event.target);
+    console.log({ taskname });
   };
   return (
     <div className="flex flex-row items-center justify-center py-4 border-t-2">
