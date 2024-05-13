@@ -1,6 +1,11 @@
 import TaskList from "./partial/TaskList";
 
-const Table = () => {
+interface TableProps {
+  newItem: string;
+}
+
+const Table = ({ newItem }: TableProps) => {
+  console.log(newItem);
   let tasks_arr = ["Eat", "Code", "Sleep", "Repeat"];
   let tasks = [
     {

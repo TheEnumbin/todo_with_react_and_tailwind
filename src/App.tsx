@@ -5,13 +5,14 @@ import "./App.css";
 import "./style.css";
 
 function App() {
+  var newItemString;
   const addItem = (item: string) => {
-    console.log(item);
+    newItemString = item;
   };
   return (
     <div className="to-do-wrapper bg-white">
       <Header handleAdd={addItem}></Header>
-      <Table></Table>
+      <Table newItem="hello"></Table>
     </div>
   );
 }
