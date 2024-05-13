@@ -12,13 +12,14 @@ export const Undone = () => {
   return <div className="p-4 text-red-800">Pending: 5</div>;
 };
 
-export const CreateComponent = () => {
+interface CreateComponentProps {
+  onClickAdd: (item: string) => void;
+}
+
+export const CreateComponent = ({ onClickAdd }: CreateComponentProps) => {
   const [taskname, setName] = useState("");
   const handleInputChange = (event) => {
     setName(event.target.value);
-  };
-  const handleAdd = (event: MouseEvent) => {
-    console.log({ taskname });
   };
   return (
     <div className="flex flex-row items-center justify-center py-4 border-t-2">
@@ -28,8 +29,8 @@ export const CreateComponent = () => {
       ></input>
       <button
         className="bg-green-700 text-white p-2 ml-1"
-        onClick={(e) => {
-          handleAdd(e);
+        onClick={() => {
+          onClickAdd(taskname);
         }}
       >
         Add Task

@@ -5,9 +5,12 @@ import "./App.css";
 import "./style.css";
 
 function App() {
+  const addItem = (item: string) => {
+    console.log(item);
+  };
   return (
     <div className="to-do-wrapper bg-white">
-      <Header></Header>
+      <Header handleAdd={addItem}></Header>
       <Table></Table>
     </div>
   );

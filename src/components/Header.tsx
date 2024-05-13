@@ -4,7 +4,12 @@ import {
   Undone,
   CreateComponent,
 } from "./partial/HeaderParts";
-const Header = () => {
+
+interface HeaderProps {
+  handleAdd: (item: string) => void;
+}
+
+const Header = ({ handleAdd }: HeaderProps) => {
   return (
     <div>
       <div className="text-black flex flex-row gap-3 items-center justify-between">
@@ -12,7 +17,7 @@ const Header = () => {
         <DoneItems></DoneItems>
         <Undone></Undone>
       </div>
-      <CreateComponent></CreateComponent>
+      <CreateComponent onClickAdd={handleAdd}></CreateComponent>
     </div>
   );
 };
