@@ -5,14 +5,14 @@ import "./App.css";
 import "./style.css";
 
 function App() {
-  var newItemString;
+  const [newItemString, passNewItemString] = useState("");
   const addItem = (item: string) => {
-    newItemString = item;
+    passNewItemString(item);
   };
   return (
     <div className="to-do-wrapper bg-white">
       <Header handleAdd={addItem}></Header>
-      <Table newItem="hello"></Table>
+      <Table newItem={newItemString}></Table>
     </div>
   );
 }

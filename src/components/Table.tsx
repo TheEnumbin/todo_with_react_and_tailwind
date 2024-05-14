@@ -5,30 +5,19 @@ interface TableProps {
 }
 
 const Table = ({ newItem }: TableProps) => {
-  console.log(newItem);
   let tasks_arr = ["Eat", "Code", "Sleep", "Repeat"];
-  let tasks = [
-    {
-      task_id: 1,
-      task_name: "Eat",
-      status: 1,
-    },
-    {
-      task_id: 2,
-      task_name: "Code",
-      status: 1,
-    },
-    {
-      task_id: 3,
-      task_name: "Sleep",
-      status: 1,
-    },
-    {
-      task_id: 4,
-      task_name: "Repeat",
-      status: 1,
-    },
-  ];
+
+  let tasks = [];
+
+  if (newItem != "") {
+    tasks = [
+      {
+        task_id: 1,
+        task_name: newItem,
+        status: 0,
+      },
+    ];
+  }
   return (
     <table className="text-black border-2 w-[100%]">
       <tbody>
