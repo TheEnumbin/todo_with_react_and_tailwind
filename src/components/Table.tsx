@@ -1,3 +1,4 @@
+import { useState } from "react";
 import TaskList from "./partial/TaskList";
 
 interface TableProps {
@@ -6,17 +7,14 @@ interface TableProps {
 
 const Table = ({ newItem }: TableProps) => {
   let tasks_arr = ["Eat", "Code", "Sleep", "Repeat"];
-
-  let tasks = [];
-
+  const [tasks, appendTask] = useState([]);
   if (newItem != "") {
-    tasks = [
-      {
-        task_id: 1,
-        task_name: newItem,
-        status: 0,
-      },
-    ];
+    let newTask = {
+      task_id: 1,
+      task_name: newItem,
+      status: 0,
+    };
+    tasks.push(newTask);
   }
   return (
     <table className="text-black border-2 w-[100%]">

@@ -5,7 +5,6 @@ interface TasklistProps {
 }
 
 const TaskList = ({ tasks }: TasklistProps) => {
-  console.log(tasks);
   return (
     <>
       {tasks.length === 0 && <p className="text-center">No Item Found</p>}
