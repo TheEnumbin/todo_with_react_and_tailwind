@@ -21,6 +21,12 @@ export const CreateComponent = ({ onClickAdd }: CreateComponentProps) => {
   const handleInputChange = (event) => {
     setName(event.target.value);
   };
+  const handleOnClickAdd = () => {
+    if (taskname != "") {
+      onClickAdd(taskname);
+      setName("");
+    }
+  };
   return (
     <div className="flex flex-row items-center justify-center py-4 border-t-2">
       <input
@@ -29,9 +35,7 @@ export const CreateComponent = ({ onClickAdd }: CreateComponentProps) => {
       ></input>
       <button
         className="bg-green-700 text-white p-2 ml-1"
-        onClick={() => {
-          onClickAdd(taskname);
-        }}
+        onClick={handleOnClickAdd}
       >
         Add Task
       </button>

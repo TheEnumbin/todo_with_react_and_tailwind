@@ -10,6 +10,11 @@ interface HeaderProps {
 }
 
 const Header = ({ handleAdd }: HeaderProps) => {
+  const addHandler = (item) => {
+    if (item != "") {
+      handleAdd(item);
+    }
+  };
   return (
     <div>
       <div className="text-black flex flex-row gap-3 items-center justify-between">
@@ -17,7 +22,7 @@ const Header = ({ handleAdd }: HeaderProps) => {
         <DoneItems></DoneItems>
         <Undone></Undone>
       </div>
-      <CreateComponent onClickAdd={handleAdd}></CreateComponent>
+      <CreateComponent onClickAdd={addHandler}></CreateComponent>
     </div>
   );
 };
