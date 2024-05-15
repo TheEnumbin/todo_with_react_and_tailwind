@@ -13,10 +13,6 @@ function App() {
         task_name: item,
         status: 0,
       };
-      // tasks.push(newTask);
-      // appendTask((tasks) => {
-      //   return tasks.concat(newTask); // append and return new array reference
-      // });
       appendTask((prevTasks) => [...prevTasks, newTask]);
     }
 
