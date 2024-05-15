@@ -5,14 +5,28 @@ import "./App.css";
 import "./style.css";
 
 function App() {
-  const [newItemString, passNewItemString] = useState("");
+  const [tasks, appendTask] = useState([]);
   const addItem = (item: string) => {
-    passNewItemString(item);
+    if (item != "") {
+      const newTask = {
+        task_id: 1,
+        task_name: item,
+        status: 0,
+      };
+      // tasks.push(newTask);
+      // appendTask((tasks) => {
+      //   return tasks.concat(newTask); // append and return new array reference
+      // });
+      appendTask((prevTasks) => [...prevTasks, newTask]);
+    }
+
+    console.log(tasks);
   };
+
   return (
     <div className="to-do-wrapper bg-white">
       <Header handleAdd={addItem}></Header>
-      <Table newItem={newItemString}></Table>
+      <Table tasks={tasks}></Table>
     </div>
   );
 }

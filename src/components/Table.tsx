@@ -1,11 +1,7 @@
 import { useState } from "react";
 import TaskList from "./partial/TaskList";
 
-interface TableProps {
-  newItem: string;
-}
-
-const Table = ({ newItem }: TableProps) => {
+const Table = ({ tasks }) => {
   let tasks_arr = ["Eat", "Code", "Sleep", "Repeat"];
 
   // let tasks = [
@@ -15,20 +11,7 @@ const Table = ({ newItem }: TableProps) => {
   //     status: 0,
   //   },
   // ];
-  const [tasks, appendTask] = useState([]);
-  if (newItem != "") {
-    const newTask = {
-      task_id: 1,
-      task_name: newItem,
-      status: 0,
-    };
-    tasks.push(newTask);
-    // appendTask((tasks) => {
-    //   return tasks.concat(newTask); // append and return new array reference
-    // });
-    // appendTask(newTask);
-    // appendTask((prevTasks) => [...prevTasks, newTask]);
-  }
+
   console.log(tasks);
   return (
     <table className="text-black border-2 w-[100%]">
