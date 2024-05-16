@@ -3,14 +3,6 @@ import TaskList from "./partial/TaskList";
 
 const Table = ({ newItem }: TableProps) => {
   let tasks_arr = ["Eat", "Code", "Sleep", "Repeat"];
-
-  // let tasks = [
-  //   {
-  //     task_id: 1,
-  //     task_name: newItem,
-  //     status: 0,
-  //   },
-  // ];
   const [tasks, appendTask] = useState([]);
   if (newItem != "") {
     const newTask = {
