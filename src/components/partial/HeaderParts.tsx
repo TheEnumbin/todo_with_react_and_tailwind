@@ -1,7 +1,7 @@
 import { MouseEvent, useState } from "react";
 
-export const TotalItems = () => {
-  return <div className="p-4 flex">Total Tasks: 10</div>;
+export const TotalItems = ({ number }) => {
+  return <div className="p-4 flex">Total Tasks: {number}</div>;
 };
 
 export const DoneItems = () => {

@@ -6,6 +6,7 @@ import "./style.css";
 
 function App() {
   const [tasks, appendTask] = useState([]);
+  const [tasks_count, setTasksCount] = useState(0);
   const addItem = (item: string) => {
     if (item != "") {
       const newTask = {
@@ -13,15 +14,14 @@ function App() {
         task_name: item,
         status: 0,
       };
-      appendTask((prevTasks) => [...prevTasks, newTask]);
+      appendTask((tasks) => [...tasks, newTask]);
+      setTasksCount(tasks_count + 1);
     }
-
-    console.log(tasks);
   };
 
   return (
     <div className="to-do-wrapper bg-white">
-      <Header handleAdd={addItem}></Header>
+      <Header number_of_tasks={tasks_count} handleAdd={addItem}></Header>
       <Table tasks={tasks}></Table>
     </div>
   );

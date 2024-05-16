@@ -6,14 +6,15 @@ import {
 } from "./partial/HeaderParts";
 
 interface HeaderProps {
+  number_of_tasks: number;
   handleAdd: (item: string) => void;
 }
 
-const Header = ({ handleAdd }: HeaderProps) => {
+const Header = ({ number_of_tasks, handleAdd }: HeaderProps) => {
   return (
     <div>
       <div className="text-black flex flex-row gap-3 items-center justify-between">
-        <TotalItems></TotalItems>
+        <TotalItems number={number_of_tasks}></TotalItems>
         <DoneItems></DoneItems>
         <Undone></Undone>
       </div>
