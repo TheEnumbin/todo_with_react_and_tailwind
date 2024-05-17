@@ -570,12 +570,20 @@ video {
   height: 40px;
 }
 
+.h-\[25px\] {
+  height: 25px;
+}
+
 .w-\[10\%\] {
   width: 10%;
 }
 
 .w-\[100\%\] {
   width: 100%;
+}
+
+.w-\[25px\] {
+  width: 25px;
 }
 
 .flex-row {
@@ -627,6 +635,11 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
 .p-2 {

@@ -8,10 +8,12 @@ export const ActionComponent = () => {
   return (
     <>
       <div className="flex flex-row gap-2">
-        <label>
-          <input type="checkbox" name="checkbox" value="value"></input>
-          Done
-        </label>
+        <input
+          className="w-[25px] h-[25px] bg-blue-500"
+          type="checkbox"
+          name="checkbox"
+          value="value"
+        ></input>
         <button>Edit</button>
       </div>
     </>
