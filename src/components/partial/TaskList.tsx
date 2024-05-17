@@ -4,7 +4,21 @@ interface TasklistProps {
   tasks: [];
 }
 
-const TaskList = ({ tasks }: TasklistProps) => {
+export const ActionComponent = () => {
+  return (
+    <>
+      <div className="flex flex-row gap-2">
+        <label>
+          <input type="checkbox" name="checkbox" value="value"></input>
+          Done
+        </label>
+        <button>Edit</button>
+      </div>
+    </>
+  );
+};
+
+export const TaskList = ({ tasks }: TasklistProps) => {
   return (
     <>
       {tasks.length === 0 && <p className="text-center">No Item Found</p>}
@@ -14,12 +28,10 @@ const TaskList = ({ tasks }: TasklistProps) => {
           <td>{task.task_name}</td>
           <td>done</td>
           <td>
-            <button>Edit</button>
+            <ActionComponent></ActionComponent>
           </td>
         </tr>
       ))}
     </>
   );
 };
-
-export default TaskList;

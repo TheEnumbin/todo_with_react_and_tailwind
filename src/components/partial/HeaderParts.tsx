@@ -1,15 +1,15 @@
 import { MouseEvent, useState } from "react";
 
-export const TotalItems = ({ number }) => {
-  return <div className="p-4 flex">Total Tasks: {number}</div>;
+export const TotalItems = ({ tItems }) => {
+  return <div className="p-4 flex">Total Tasks: {tItems}</div>;
 };
 
-export const DoneItems = () => {
-  return <div className="p-4 text-green-800">Completed: 10</div>;
+export const DoneItems = ({ dItems }) => {
+  return <div className="p-4 text-green-800">Completed: {dItems}</div>;
 };
 
-export const Undone = () => {
-  return <div className="p-4 text-red-800">Pending: 5</div>;
+export const Undone = ({ undone }) => {
+  return <div className="p-4 text-red-800">Pending: {undone}</div>;
 };
 
 interface CreateComponentProps {

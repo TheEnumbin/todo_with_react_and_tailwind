@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TaskList from "./partial/TaskList";
+import { TaskList } from "./partial/TaskList";
 
 const Table = ({ tasks }) => {
   let tasks_arr = ["Eat", "Code", "Sleep", "Repeat"];

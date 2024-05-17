@@ -5,7 +5,7 @@ import "./App.css";
 import "./style.css";
 
 function App() {
-  const [tasks, appendTask] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [tasks_count, setTasksCount] = useState(0);
   const addItem = (item: string) => {
     if (item != "") {
@@ -14,7 +14,7 @@ function App() {
         task_name: item,
         status: 0,
       };
-      appendTask((tasks) => [...tasks, newTask]);
+      setTasks((tasks) => [...tasks, newTask]);
       setTasksCount(tasks_count + 1);
     }
   };
