@@ -1,10 +1,24 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 interface TasklistProps {
   tasks: [];
+  updateCount: (checked: boolean) => void;
 }
 
-export const ActionComponent = () => {
+interface ActionComponentProps {
+  preChecked: boolean;
+  updateStatus: (checked: boolean) => void;
+}
+
+export const ActionComponent = ({
+  preChecked,
+  updateStatus,
+}: ActionComponentProps) => {
+  const [isChecked, setDone] = useState(preChecked);
+  const checkHandler = (event) => {
+    setDone(!isChecked);
+    updateStatus(isChecked);
+  };
   return (
     <>
       <div className="flex flex-row gap-2">
@@ -13,6 +27,8 @@ export const ActionComponent = () => {
           type="checkbox"
           name="checkbox"
           value="value"
+          checked={isChecked}
+          onChange={checkHandler}
         ></input>
         <button>Edit</button>
       </div>
@@ -20,7 +36,7 @@ export const ActionComponent = () => {
   );
 };
 
-export const TaskList = ({ tasks }: TasklistProps) => {
+export const TaskList = ({ tasks, updateCount }: TasklistProps) => {
   return (
     <>
       {tasks.length === 0 && <p className="text-center">No Item Found</p>}
@@ -30,7 +46,10 @@ export const TaskList = ({ tasks }: TasklistProps) => {
           <td>{task.task_name}</td>
           <td>done</td>
           <td>
-            <ActionComponent></ActionComponent>
+            <ActionComponent
+              preChecked={task.status}
+              updateStatus={updateCount}
+            ></ActionComponent>
           </td>
         </tr>
       ))}

@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { TaskList } from "./partial/TaskList";
 
-const Table = ({ tasks }) => {
+interface TableProps {
+  tasks;
+  countUpdate: (checked: boolean) => void;
+}
+
+const Table = ({ tasks, countUpdate }: TableProps) => {
   let tasks_arr = ["Eat", "Code", "Sleep", "Repeat"];
   return (
     <table className="text-black border-2 w-[100%]">
@@ -12,7 +17,7 @@ const Table = ({ tasks }) => {
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <TaskList tasks={tasks}></TaskList>
+        <TaskList tasks={tasks} updateCount={countUpdate}></TaskList>
       </tbody>
     </table>
   );

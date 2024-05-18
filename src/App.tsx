@@ -7,22 +7,34 @@ import "./style.css";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [tasks_count, setTasksCount] = useState(0);
+  const [done_count, setDoneCount] = useState(0);
   const addItem = (item: string) => {
     if (item != "") {
       const newTask = {
         task_id: 1,
         task_name: item,
-        status: 0,
+        status: false,
       };
       setTasks((tasks) => [...tasks, newTask]);
       setTasksCount(tasks_count + 1);
     }
   };
+  const updateTask = (checked: boolean) => {
+    if (checked == true) {
+      setDoneCount(done_count + 1);
+    } else {
+      setDoneCount(done_count - 1);
+    }
+  };
 
   return (
     <div className="to-do-wrapper bg-white">
-      <Header number_of_tasks={tasks_count} handleAdd={addItem}></Header>
-      <Table tasks={tasks}></Table>
+      <Header
+        number_of_tasks={tasks_count}
+        done_count={done_count}
+        handleAdd={addItem}
+      ></Header>
+      <Table tasks={tasks} countUpdate={updateTask}></Table>
     </div>
   );
 }
