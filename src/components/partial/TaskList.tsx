@@ -16,8 +16,13 @@ export const ActionComponent = ({
 }: ActionComponentProps) => {
   const [isChecked, setDone] = useState(preChecked);
   const checkHandler = (event) => {
-    setDone(!isChecked);
-    updateStatus(isChecked);
+    if (event.target.checked == true) {
+      setDone(event.target.checked);
+      updateStatus(event.target.checked);
+    } else {
+      setDone(event.target.checked);
+      updateStatus(event.target.checked);
+    }
   };
   return (
     <>
