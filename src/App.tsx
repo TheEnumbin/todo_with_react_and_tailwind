@@ -25,13 +25,11 @@ function App() {
     console.log(checked);
 
     if (checked == true) {
-      let newDone = done_count + 1;
-      setDoneCount(newDone);
-      setPendingCount(tasks_count - newDone);
+      setDoneCount((prevDone) => prevDone + 1);
+      setPendingCount((prevPending) => prevPending - 1);
     } else {
-      let newDone = done_count - 1;
-      setDoneCount(newDone);
-      setPendingCount(tasks_count - newDone);
+      setDoneCount((prevDone) => prevDone - 1);
+      setPendingCount((prevPending) => prevPending + 1);
     }
   };
 
