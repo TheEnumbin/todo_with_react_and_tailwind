@@ -38,6 +38,9 @@ export const ActionComponent = ({
         <button className="py-[6px] px-2 rounded bg-blue-600 text-white text-[14px]">
           Edit
         </button>
+        <button className="py-[6px] px-2 rounded bg-red-600 text-white text-[14px]">
+          Delete
+        </button>
       </div>
     </>
   );
