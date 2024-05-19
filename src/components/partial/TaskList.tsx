@@ -26,7 +26,7 @@ export const ActionComponent = ({
   };
   return (
     <>
-      <div className="flex flex-row gap-2">
+      <div className="flex flex-row gap-2 items-center">
         <input
           className="w-[25px] h-[25px] bg-blue-500"
           type="checkbox"
@@ -35,7 +35,9 @@ export const ActionComponent = ({
           checked={isChecked}
           onChange={checkHandler}
         ></input>
-        <button>Edit</button>
+        <button className="py-[6px] px-2 rounded bg-blue-600 text-white text-[14px]">
+          Edit
+        </button>
       </div>
     </>
   );
