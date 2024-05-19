@@ -23,12 +23,15 @@ function App() {
   };
   const updateTask = (checked: boolean) => {
     console.log(checked);
+
     if (checked == true) {
-      setDoneCount(done_count + 1);
-      setPendingCount(tasks_count - 1);
+      let newDone = done_count + 1;
+      setDoneCount(newDone);
+      setPendingCount(tasks_count - newDone);
     } else {
-      setDoneCount(done_count - 1);
-      setPendingCount(undone + 1);
+      let newDone = done_count - 1;
+      setDoneCount(newDone);
+      setPendingCount(tasks_count - newDone);
     }
   };
 
