@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "./components/Header";
+import Alert from "./components/Alert";
 import Table from "./components/Table";
 import "./App.css";
 import "./style.css";
@@ -33,6 +34,9 @@ function App() {
     }
   };
 
+  const updateTaskList = () => {
+    console.log("deleting");
+  };
   return (
     <div className="to-do-wrapper bg-white">
       <Header
@@ -41,7 +45,11 @@ function App() {
         undone={undone}
         handleAdd={addItem}
       ></Header>
-      <Table tasks={tasks} countUpdate={updateTask}></Table>
+      <Table
+        tasks={tasks}
+        countUpdate={updateTask}
+        updateList={updateTaskList}
+      ></Table>
     </div>
   );
 }

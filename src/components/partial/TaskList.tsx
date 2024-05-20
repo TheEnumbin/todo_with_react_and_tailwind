@@ -1,20 +1,18 @@
 import { Fragment, useState } from "react";
 
-interface TasklistProps {
-  tasks: [];
-  updateCount: (checked: boolean) => void;
-}
-
 interface ActionComponentProps {
   preChecked: boolean;
   updateStatus: (checked: boolean) => void;
+  removeItem: () => void;
 }
 
 export const ActionComponent = ({
   preChecked,
   updateStatus,
+  removeItem,
 }: ActionComponentProps) => {
   const [isChecked, setDone] = useState(preChecked);
+
   const checkHandler = (event) => {
     if (event.target.checked == true) {
       setDone(event.target.checked);
@@ -22,6 +20,11 @@ export const ActionComponent = ({
     } else {
       setDone(event.target.checked);
       updateStatus(event.target.checked);
+    }
+  };
+  const deleteClickHandler = () => {
+    if (window.confirm("Are you sure you want to delete this item?") == true) {
+      removeItem();
     }
   };
   return (
@@ -38,7 +41,10 @@ export const ActionComponent = ({
         <button className="py-[6px] px-2 rounded bg-blue-600 text-white text-[14px]">
           Edit
         </button>
-        <button className="py-[6px] px-2 rounded bg-red-600 text-white text-[14px]">
+        <button
+          onClick={deleteClickHandler}
+          className="py-[6px] px-2 rounded bg-red-600 text-white text-[14px]"
+        >
           Delete
         </button>
       </div>
@@ -46,12 +52,22 @@ export const ActionComponent = ({
   );
 };
 
-export const TaskList = ({ tasks, updateCount }: TasklistProps) => {
+interface TasklistProps {
+  tasks: [];
+  updateCount: (checked: boolean) => void;
+  deleteHandler: () => void;
+}
+
+export const TaskList = ({
+  tasks,
+  updateCount,
+  deleteHandler,
+}: TasklistProps) => {
   return (
     <>
       {tasks.length === 0 && <p className="text-center">No Item Found</p>}
       {tasks.map((task, index) => (
-        <tr>
+        <tr key={index}>
           <td>{task.task_id}</td>
           <td>{task.task_name}</td>
           <td>done</td>
@@ -59,6 +75,7 @@ export const TaskList = ({ tasks, updateCount }: TasklistProps) => {
             <ActionComponent
               preChecked={task.status}
               updateStatus={updateCount}
+              removeItem={deleteHandler}
             ></ActionComponent>
           </td>
         </tr>

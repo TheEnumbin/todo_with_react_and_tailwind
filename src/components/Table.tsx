@@ -4,9 +4,9 @@ import { TaskList } from "./partial/TaskList";
 interface TableProps {
   tasks;
   countUpdate: (checked: boolean) => void;
+  updateList: () => void;
 }
-
-const Table = ({ tasks, countUpdate }: TableProps) => {
+const Table = ({ tasks, countUpdate, updateList }: TableProps) => {
   let tasks_arr = ["Eat", "Code", "Sleep", "Repeat"];
   return (
     <table className="text-black border-2 w-[100%]">
@@ -17,7 +17,11 @@ const Table = ({ tasks, countUpdate }: TableProps) => {
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <TaskList tasks={tasks} updateCount={countUpdate}></TaskList>
+        <TaskList
+          tasks={tasks}
+          updateCount={countUpdate}
+          deleteHandler={updateList}
+        ></TaskList>
       </tbody>
     </table>
   );
