@@ -3,7 +3,7 @@ import { Fragment, useState } from "react";
 interface ActionComponentProps {
   preChecked: boolean;
   updateStatus: (checked: boolean) => void;
-  removeItem: () => void;
+  removeItem: (id) => void;
 }
 
 export const ActionComponent = ({
@@ -22,9 +22,9 @@ export const ActionComponent = ({
       updateStatus(event.target.checked);
     }
   };
-  const deleteClickHandler = () => {
+  const deleteClickHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this item?") == true) {
-      removeItem();
+      removeItem(id);
     }
   };
   return (
@@ -42,7 +42,7 @@ export const ActionComponent = ({
           Edit
         </button>
         <button
-          onClick={deleteClickHandler}
+          onClick={() => deleteClickHandler(1)}
           className="py-[6px] px-2 rounded bg-red-600 text-white text-[14px]"
         >
           Delete
@@ -55,7 +55,7 @@ export const ActionComponent = ({
 interface TasklistProps {
   tasks: [];
   updateCount: (checked: boolean) => void;
-  deleteHandler: () => void;
+  deleteHandler: (id) => void;
 }
 
 export const TaskList = ({
@@ -75,7 +75,7 @@ export const TaskList = ({
             <ActionComponent
               preChecked={task.status}
               updateStatus={updateCount}
-              removeItem={deleteHandler}
+              removeItem={() => deleteHandler(id)}
             ></ActionComponent>
           </td>
         </tr>
