@@ -75,7 +75,7 @@ export const TaskList = ({
             <ActionComponent
               preChecked={task.status}
               updateStatus={updateCount}
-              removeItem={() => deleteHandler(id)}
+              removeItem={(id) => deleteHandler(id)}
             ></ActionComponent>
           </td>
         </tr>

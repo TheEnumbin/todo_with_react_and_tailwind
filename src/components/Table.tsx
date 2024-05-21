@@ -4,7 +4,7 @@ import { TaskList } from "./partial/TaskList";
 interface TableProps {
   tasks;
   countUpdate: (checked: boolean) => void;
-  updateList: () => void;
+  updateList: (id) => void;
 }
 const Table = ({ tasks, countUpdate, updateList }: TableProps) => {
   let tasks_arr = ["Eat", "Code", "Sleep", "Repeat"];
@@ -20,7 +20,7 @@ const Table = ({ tasks, countUpdate, updateList }: TableProps) => {
         <TaskList
           tasks={tasks}
           updateCount={countUpdate}
-          deleteHandler={updateList}
+          deleteHandler={(id) => updateList(id)}
         ></TaskList>
       </tbody>
     </table>

@@ -17,7 +17,7 @@ function App() {
         task_name: item,
         status: false,
       };
-      setTasks((tasks) => [...tasks, newTask]);
+      setTasks((prevTasks) => [...prevTasks, newTask]);
       setTasksCount(tasks_count + 1);
       setPendingCount(undone + 1);
     }
@@ -34,8 +34,9 @@ function App() {
     }
   };
 
-  const updateTaskList = () => {
-    console.log("deleting");
+  const updateTaskList = (id) => {
+    console.log("deleting : " + id);
+    setTasks((prevTasks) => prevTasks.filter((task) => task.task_id !== id));
   };
   return (
     <div className="to-do-wrapper bg-white">
@@ -48,7 +49,7 @@ function App() {
       <Table
         tasks={tasks}
         countUpdate={updateTask}
-        updateList={updateTaskList}
+        updateList={(id) => updateTaskList(id)}
       ></Table>
     </div>
   );
