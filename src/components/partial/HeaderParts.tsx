@@ -1,11 +1,12 @@
 import { MouseEvent, useState } from "react";
+// Used Prop Drilling to Add Task and Update Counts.
 
-export const TotalItems = ({ tItems }) => {
-  return <div className="p-4 flex">Total Tasks: {tItems}</div>;
+export const TotalItems = ({ number_of_tasks }) => {
+  return <div className="p-4 flex">Total Tasks: {number_of_tasks}</div>;
 };
 
-export const DoneItems = ({ dItems }) => {
-  return <div className="p-4 text-green-800">Completed: {dItems}</div>;
+export const DoneItems = ({ done_count }) => {
+  return <div className="p-4 text-green-800">Completed: {done_count}</div>;
 };
 
 export const Undone = ({ undone }) => {
@@ -13,17 +14,17 @@ export const Undone = ({ undone }) => {
 };
 
 interface CreateComponentProps {
-  onClickAdd: (item: string) => void;
+  handleAdd: (item: string) => void;
 }
 
-export const CreateComponent = ({ onClickAdd }: CreateComponentProps) => {
+export const CreateComponent = ({ handleAdd }: CreateComponentProps) => {
   const [taskname, setName] = useState("");
   const handleInputChange = (event) => {
     setName(event.target.value);
   };
   const handleOnClickAdd = () => {
     if (taskname != "") {
-      onClickAdd(taskname);
+      handleAdd(taskname);
       setName("");
     }
   };

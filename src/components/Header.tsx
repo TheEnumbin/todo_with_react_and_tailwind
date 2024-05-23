@@ -18,14 +18,16 @@ const Header = ({
   undone,
   handleAdd,
 }: HeaderProps) => {
+  // Prop drilling from First Child "Header" to Deeper Children with the Props
   return (
     <div>
       <div className="text-black flex flex-row gap-3 items-center justify-between">
-        <TotalItems tItems={number_of_tasks}></TotalItems>
-        <DoneItems dItems={done_count}></DoneItems>
+        <TotalItems number_of_tasks={number_of_tasks}></TotalItems>
+        <DoneItems done_count={done_count}></DoneItems>
         <Undone undone={undone}></Undone>
       </div>
-      <CreateComponent onClickAdd={handleAdd}></CreateComponent>
+
+      <CreateComponent handleAdd={handleAdd}></CreateComponent>
     </div>
   );
 };

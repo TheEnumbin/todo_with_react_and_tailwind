@@ -41,6 +41,7 @@ function App() {
   return (
     <div className="to-do-wrapper bg-white">
       <Header
+        // Prop drilling from Parent "App" to Child "Header" with the Props
         number_of_tasks={tasks_count}
         done_count={done_count}
         undone={undone}
