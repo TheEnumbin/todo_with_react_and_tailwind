@@ -3,13 +3,13 @@ import { Fragment, useState } from "react";
 interface ActionComponentProps {
   preChecked: boolean;
   updateStatus: (checked: boolean) => void;
-  removeItem: (id) => void;
+  updateList: (id) => void;
 }
 
 export const ActionComponent = ({
   preChecked,
   updateStatus,
-  removeItem,
+  updateList,
 }: ActionComponentProps) => {
   const [isChecked, setDone] = useState(preChecked);
 
@@ -24,7 +24,7 @@ export const ActionComponent = ({
   };
   const deleteClickHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this item?") == true) {
-      removeItem(id);
+      updateList(id);
     }
   };
   return (
@@ -54,15 +54,11 @@ export const ActionComponent = ({
 
 interface TasklistProps {
   tasks: [];
-  updateCount: (checked: boolean) => void;
-  deleteHandler: (id) => void;
+  countUpdate: (checked: boolean) => void;
+  updateList: (id) => void;
 }
 
-export const TaskList = ({
-  tasks,
-  updateCount,
-  deleteHandler,
-}: TasklistProps) => {
+export const TaskList = ({ tasks, countUpdate, updateList }: TasklistProps) => {
   return (
     <>
       {tasks.length === 0 && <p className="text-center">No Item Found</p>}
@@ -74,8 +70,8 @@ export const TaskList = ({
           <td>
             <ActionComponent
               preChecked={task.status}
-              updateStatus={updateCount}
-              removeItem={(id) => deleteHandler(id)}
+              updateStatus={countUpdate}
+              updateList={(id) => updateList(id)}
             ></ActionComponent>
           </td>
         </tr>

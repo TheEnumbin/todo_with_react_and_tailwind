@@ -19,8 +19,8 @@ const Table = ({ tasks, countUpdate, updateList }: TableProps) => {
         </tr>
         <TaskList
           tasks={tasks}
-          updateCount={countUpdate}
-          deleteHandler={(id) => updateList(id)}
+          countUpdate={countUpdate}
+          updateList={(id) => updateList(id)}
         ></TaskList>
       </tbody>
     </table>
