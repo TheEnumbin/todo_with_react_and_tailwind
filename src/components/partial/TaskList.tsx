@@ -30,7 +30,7 @@ export const ActionComponent = ({
   };
   const deleteClickHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this item?") == true) {
-      setTasks((prevTasks) => prevTasks.filter((task) => task.task_id !== id));
+      updateList(id);
     }
   };
   return (
