@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import Alert from "./components/Alert";
+import TableContext from "./globals/TableContext";
 import Table from "./components/Table";
 import "./App.css";
 import "./style.css";
@@ -35,7 +36,6 @@ function App() {
   };
 
   const updateTaskList = (id) => {
-    console.log("deleting : " + id);
     setTasks((prevTasks) => prevTasks.filter((task) => task.task_id !== id));
   };
   return (
@@ -47,11 +47,13 @@ function App() {
         undone={undone}
         handleAdd={addItem}
       ></Header>
-      <Table
-        tasks={tasks}
-        countUpdate={updateTask}
-        updateList={(id) => updateTaskList(id)}
-      ></Table>
+      <TableContext.Provider value={{ tasks, setTasks }}>
+        <Table
+          tasks={tasks}
+          countUpdate={updateTask}
+          updateList={(id) => updateTaskList(id)}
+        ></Table>
+      </TableContext.Provider>
     </div>
   );
 }
