@@ -1,4 +1,5 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
+import TableContext from "../../globals/TableContext";
 
 interface ActionComponentProps {
   preChecked: boolean;
@@ -12,11 +13,16 @@ export const ActionComponent = ({
   updateList,
 }: ActionComponentProps) => {
   const [isChecked, setDone] = useState(preChecked);
-
-  const checkHandler = (event) => {
+  const { tasks, setTasks } = useContext(TableContext);
+  const checkHandler = (event, id) => {
     if (event.target.checked == true) {
       setDone(event.target.checked);
       updateStatus(event.target.checked);
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.task_id === id ? { ...task, status: true } : task
+        )
+      );
     } else {
       setDone(event.target.checked);
       updateStatus(event.target.checked);
@@ -36,7 +42,7 @@ export const ActionComponent = ({
           name="checkbox"
           value="value"
           checked={isChecked}
-          onChange={checkHandler}
+          onChange={(event) => checkHandler(event, 1)}
         ></input>
         <button className="py-[6px] px-2 rounded bg-blue-600 text-white text-[14px]">
           Edit
@@ -59,6 +65,7 @@ interface TasklistProps {
 }
 
 export const TaskList = ({ tasks, countUpdate, updateList }: TasklistProps) => {
+  console.log(tasks);
   return (
     <>
       {tasks.length === 0 && <p className="text-center">No Item Found</p>}

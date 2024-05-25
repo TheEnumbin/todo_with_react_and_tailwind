@@ -7,7 +7,24 @@ import "./App.css";
 import "./style.css";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  let pre_tasks = [
+    {
+      task_id: 1,
+      task_name: "Task 1",
+      status: false,
+    },
+    {
+      task_id: 2,
+      task_name: "Task 2",
+      status: false,
+    },
+    {
+      task_id: 3,
+      task_name: "Task 3",
+      status: false,
+    },
+  ];
+  const [tasks, setTasks] = useState(pre_tasks);
   const [tasks_count, setTasksCount] = useState(0);
   const [done_count, setDoneCount] = useState(0);
   const [undone, setPendingCount] = useState(tasks_count - done_count);
