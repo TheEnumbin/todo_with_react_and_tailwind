@@ -12,11 +12,9 @@ export const ActionComponent = ({
   updateStatus,
   updateList,
 }: ActionComponentProps) => {
-  const [isChecked, setDone] = useState(preChecked);
   const { tasks, setTasks } = useContext(TableContext);
   const checkHandler = (event, id) => {
     if (event.target.checked == true) {
-      setDone(event.target.checked);
       updateStatus(event.target.checked);
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
@@ -24,8 +22,12 @@ export const ActionComponent = ({
         )
       );
     } else {
-      setDone(event.target.checked);
       updateStatus(event.target.checked);
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.task_id === id ? { ...task, status: false } : task
+        )
+      );
     }
   };
   const deleteClickHandler = (id) => {
@@ -41,7 +43,7 @@ export const ActionComponent = ({
           type="checkbox"
           name="checkbox"
           value="value"
-          checked={isChecked}
+          checked={preChecked}
           onChange={(event) => checkHandler(event, 1)}
         ></input>
         <button className="py-[6px] px-2 rounded bg-blue-600 text-white text-[14px]">
