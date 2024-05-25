@@ -4,13 +4,11 @@ import TableContext from "../../globals/TableContext";
 interface ActionComponentProps {
   preChecked: boolean;
   updateStatus: (checked: boolean) => void;
-  updateList: (id) => void;
 }
 
 export const ActionComponent = ({
   preChecked,
   updateStatus,
-  updateList,
 }: ActionComponentProps) => {
   const { tasks, setTasks } = useContext(TableContext);
   const checkHandler = (event, id) => {
@@ -32,7 +30,7 @@ export const ActionComponent = ({
   };
   const deleteClickHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this item?") == true) {
-      updateList(id);
+      setTasks((prevTasks) => prevTasks.filter((task) => task.task_id !== id));
     }
   };
   return (
@@ -63,10 +61,9 @@ export const ActionComponent = ({
 interface TasklistProps {
   tasks: [];
   countUpdate: (checked: boolean) => void;
-  updateList: (id) => void;
 }
 
-export const TaskList = ({ tasks, countUpdate, updateList }: TasklistProps) => {
+export const TaskList = ({ tasks, countUpdate }: TasklistProps) => {
   console.log(tasks);
   return (
     <>
@@ -80,7 +77,6 @@ export const TaskList = ({ tasks, countUpdate, updateList }: TasklistProps) => {
             <ActionComponent
               preChecked={task.status}
               updateStatus={countUpdate}
-              updateList={(id) => updateList(id)}
             ></ActionComponent>
           </td>
         </tr>

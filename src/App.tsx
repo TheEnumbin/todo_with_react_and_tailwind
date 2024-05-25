@@ -52,9 +52,6 @@ function App() {
     }
   };
 
-  const updateTaskList = (id) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.task_id !== id));
-  };
   return (
     <div className="to-do-wrapper bg-white">
       <Header
@@ -65,11 +62,7 @@ function App() {
         handleAdd={addItem}
       ></Header>
       <TableContext.Provider value={{ tasks, setTasks }}>
-        <Table
-          tasks={tasks}
-          countUpdate={updateTask}
-          updateList={(id) => updateTaskList(id)}
-        ></Table>
+        <Table tasks={tasks} countUpdate={updateTask}></Table>
       </TableContext.Provider>
     </div>
   );
