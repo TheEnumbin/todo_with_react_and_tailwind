@@ -30,9 +30,10 @@ export const ActionComponent = ({
   };
   const deleteClickHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this item?") == true) {
-      updateList(id);
+      setTasks((prevTasks) => prevTasks.filter((task) => task.task_id !== id));
     }
   };
+
   return (
     <>
       <div className="flex flex-row gap-2 items-center">
