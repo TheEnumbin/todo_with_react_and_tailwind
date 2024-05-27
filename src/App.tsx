@@ -61,7 +61,9 @@ function App() {
         undone={undone}
         handleAdd={addItem}
       ></Header>
+
       <TableContext.Provider value={{ tasks, setTasks }}>
+// Here only the context is wrapped around the table since context change will re render the table
         <Table tasks={tasks} countUpdate={updateTask}></Table>
       </TableContext.Provider>
     </div>
