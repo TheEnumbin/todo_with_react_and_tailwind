@@ -2,11 +2,13 @@ import { Fragment, useState, useContext } from "react";
 import TableContext from "../../globals/TableContext";
 
 interface ActionComponentProps {
+  task_id: number;
   preChecked: boolean;
   updateStatus: (checked: boolean) => void;
 }
 
 export const ActionComponent = ({
+  task_id,
   preChecked,
   updateStatus,
 }: ActionComponentProps) => {
@@ -43,13 +45,13 @@ export const ActionComponent = ({
           name="checkbox"
           value="value"
           checked={preChecked}
-          onChange={(event) => checkHandler(event, 1)}
+          onChange={(event) => checkHandler(event, task_id)}
         ></input>
         <button className="py-[6px] px-2 rounded bg-blue-600 text-white text-[14px]">
           Edit
         </button>
         <button
-          onClick={() => deleteClickHandler(1)}
+          onClick={() => deleteClickHandler(task_id)}
           className="py-[6px] px-2 rounded bg-red-600 text-white text-[14px]"
         >
           Delete
@@ -76,6 +78,7 @@ export const TaskList = ({ tasks, countUpdate }: TasklistProps) => {
           <td>done</td>
           <td>
             <ActionComponent
+              task_id={task.task_id}
               preChecked={task.status}
               updateStatus={countUpdate}
             ></ActionComponent>
