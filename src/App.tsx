@@ -25,7 +25,7 @@ function App() {
     },
   ];
   const [tasks, setTasks] = useState(pre_tasks);
-  const [tasks_count, setTasksCount] = useState(0);
+  const [tasks_count, setTasksCount] = useState(tasks.length);
   const [done_count, setDoneCount] = useState(0);
   const [undone, setPendingCount] = useState(tasks_count - done_count);
   const addItem = (item: string) => {
