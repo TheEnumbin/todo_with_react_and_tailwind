@@ -26,18 +26,20 @@ function App() {
   ];
   const [tasks, setTasks] = useState(pre_tasks);
   const [tasks_count, setTasksCount] = useState(tasks.length);
+  const [newId, setNewId] = useState(tasks.length + 1);
   const [done_count, setDoneCount] = useState(0);
   const [undone, setPendingCount] = useState(tasks_count - done_count);
   const addItem = (item: string) => {
     if (item != "") {
       const newTask = {
-        task_id: 1,
+        task_id: newId,
         task_name: item,
         status: false,
       };
       setTasks((prevTasks) => [...prevTasks, newTask]);
       setTasksCount(tasks_count + 1);
       setPendingCount(undone + 1);
+      setNewId(newId + 1);
     }
   };
   const updateTask = (checked: boolean) => {
