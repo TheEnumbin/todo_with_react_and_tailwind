@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Alert from "./components/Alert";
-import TableContext from "./globals/TableContext";
+import { TableContext } from "./globals/AllContext";
 import Table from "./components/Table";
 import "./App.css";
 import "./style.css";
@@ -53,6 +53,7 @@ function App() {
   };
   useEffect(() => {
     if (tasks.length == 0) {
+      setDoneCount(0);
       setTasksCount(0);
       setPendingCount(0);
       setNewId(1);

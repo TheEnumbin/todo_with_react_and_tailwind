@@ -1,5 +1,5 @@
 import { Fragment, useState, useContext } from "react";
-import TableContext from "../../globals/TableContext";
+import { TableContext } from "../../globals/AllContext";
 
 interface ActionComponentProps {
   task_id: number;
