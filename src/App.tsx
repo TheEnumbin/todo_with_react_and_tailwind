@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Alert from "./components/Alert";
 import TableContext from "./globals/TableContext";
@@ -43,8 +43,6 @@ function App() {
     }
   };
   const updateTask = (checked: boolean) => {
-    console.log(checked);
-
     if (checked == true) {
       setDoneCount((prevDone) => prevDone + 1);
       setPendingCount((prevPending) => prevPending - 1);
@@ -53,6 +51,13 @@ function App() {
       setPendingCount((prevPending) => prevPending + 1);
     }
   };
+  useEffect(() => {
+    if (tasks.length == 0) {
+      setTasksCount(0);
+      setPendingCount(0);
+      setNewId(1);
+    }
+  }, [tasks]);
 
   return (
     <div className="to-do-wrapper bg-white">
@@ -63,7 +68,6 @@ function App() {
         undone={undone}
         handleAdd={addItem}
       ></Header>
-
       <TableContext.Provider value={{ tasks, setTasks }}>
         {/* Here only the context is wrapped around the table since context change will re render the table */}
         <Table tasks={tasks} countUpdate={updateTask}></Table>
