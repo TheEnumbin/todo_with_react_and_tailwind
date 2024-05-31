@@ -1,6 +1,13 @@
 import { ReactNode } from "react";
 
-const EditModal = ({ text, children, onCloseButton }: AlertProps) => {
+interface ModalProps {
+  isClosed: boolean;
+}
+
+const EditModal = ({ isClosed }: ModalProps) => {
+  if (isClosed) {
+    return null;
+  }
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
       <div className="bg-white p-4 rounded shadow-lg w-1/3">
