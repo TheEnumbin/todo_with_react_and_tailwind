@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
-import Alert from "./components/Alert";
+import EditModal from "./components/Modal";
 import { TableContext } from "./globals/AllContext";
 import Table from "./components/Table";
 import "./App.css";
@@ -73,6 +73,7 @@ function App() {
         {/* Here only the context is wrapped around the table since context change will re render the table */}
         <Table tasks={tasks} countUpdate={updateTask}></Table>
       </TableContext.Provider>
+      <EditModal></EditModal>
     </div>
   );
 }
