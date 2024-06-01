@@ -29,6 +29,7 @@ function App() {
   const [newId, setNewId] = useState(tasks.length + 1);
   const [done_count, setDoneCount] = useState(0);
   const [undone, setPendingCount] = useState(tasks_count - done_count);
+  const [isClosed, setModalVisibility] = useState(true);
   const addItem = (item: string) => {
     if (item != "") {
       const newTask = {
@@ -59,7 +60,14 @@ function App() {
       setNewId(1);
     }
   }, [tasks]);
-
+  useEffect(() => {
+    setModalVisibility(true);
+  }, []);
+  const contextValue = {
+    tableValue: [tasks, setTasks],
+    modalValue: [isClosed, setModalVisibility],
+  };
+  // console.log(contextValue.tableValue);
   return (
     <div className="to-do-wrapper bg-white">
       <Header
@@ -69,10 +77,10 @@ function App() {
         undone={undone}
         handleAdd={addItem}
       ></Header>
-      <TableContext.Provider value={{ tasks, setTasks }}>
+      <TableContext.Provider value={contextValue}>
         {/* Here only the context is wrapped around the table since context change will re render the table */}
         <Table tasks={tasks} countUpdate={updateTask}></Table>
-        <EditModal isClosed={false}></EditModal>
+        <EditModal isClosed={isClosed}></EditModal>
       </TableContext.Provider>
     </div>
   );

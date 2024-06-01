@@ -12,7 +12,9 @@ export const ActionComponent = ({
   preChecked,
   updateStatus,
 }: ActionComponentProps) => {
-  const { tasks, setTasks } = useContext(TableContext);
+  const { tableValue, modalValue } = useContext(TableContext);
+  const [tasks, setTasks] = tableValue;
+  const [isClosed, setModalVisibility] = modalValue;
   const checkHandler = (event, id) => {
     if (event.target.checked == true) {
       updateStatus(event.target.checked);
