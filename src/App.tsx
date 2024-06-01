@@ -29,7 +29,7 @@ function App() {
   const [newId, setNewId] = useState(tasks.length + 1);
   const [done_count, setDoneCount] = useState(0);
   const [undone, setPendingCount] = useState(tasks_count - done_count);
-  const [isClosed, setModalVisibility] = useState(true);
+  const [isClosed, setModalClosed] = useState(true);
   const addItem = (item: string) => {
     if (item != "") {
       const newTask = {
@@ -61,11 +61,11 @@ function App() {
     }
   }, [tasks]);
   useEffect(() => {
-    setModalVisibility(true);
+    setModalClosed(true);
   }, []);
   const contextValue = {
     tableValue: [tasks, setTasks],
-    modalValue: [isClosed, setModalVisibility],
+    modalValue: [isClosed, setModalClosed],
   };
   // console.log(contextValue.tableValue);
   return (
