@@ -14,7 +14,7 @@ export const ActionComponent = ({
 }: ActionComponentProps) => {
   const { tableValue, modalValue } = useContext(TableContext);
   const [tasks, setTasks] = tableValue;
-  const [isClosed, setModalClosed] = modalValue;
+  const [editId, setEditId] = modalValue;
   const checkHandler = (event, id) => {
     if (event.target.checked == true) {
       updateStatus(event.target.checked);
@@ -38,7 +38,7 @@ export const ActionComponent = ({
     }
   };
   const editClickHandler = (id) => {
-    setModalClosed(false);
+    setEditId(id);
   };
 
   return (

@@ -29,7 +29,7 @@ function App() {
   const [newId, setNewId] = useState(tasks.length + 1);
   const [done_count, setDoneCount] = useState(0);
   const [undone, setPendingCount] = useState(tasks_count - done_count);
-  const [isClosed, setModalClosed] = useState(true);
+  const [editId, setEditId] = useState(0);
   const addItem = (item: string) => {
     if (item != "") {
       const newTask = {
@@ -61,11 +61,11 @@ function App() {
     }
   }, [tasks]);
   useEffect(() => {
-    setModalClosed(true);
+    setEditId(0);
   }, []);
   const contextValue = {
     tableValue: [tasks, setTasks],
-    modalValue: [isClosed, setModalClosed],
+    modalValue: [editId, setEditId],
   };
   // console.log(contextValue.tableValue);
   return (
@@ -80,7 +80,7 @@ function App() {
       <TableContext.Provider value={contextValue}>
         {/* Here only the context is wrapped around the table since context change will re render the table */}
         <Table tasks={tasks} countUpdate={updateTask}></Table>
-        <EditModal isClosed={isClosed}></EditModal>
+        <EditModal></EditModal>
       </TableContext.Provider>
     </div>
   );
