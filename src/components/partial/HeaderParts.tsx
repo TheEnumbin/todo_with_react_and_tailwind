@@ -33,6 +33,7 @@ export const CreateComponent = ({ handleAdd }: CreateComponentProps) => {
       <input
         className="border-zinc-400 border-[1px] h-[40px] px-[6px]"
         onChange={handleInputChange}
+        value={taskname}
       ></input>
       <button
         className="bg-green-700 text-white p-2 ml-1"
