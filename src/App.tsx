@@ -7,6 +7,7 @@ import "./App.css";
 import "./style.css";
 
 function App() {
+  // Default/Demo Task Array
   let pre_tasks = [
     {
       task_id: 1,
@@ -24,12 +25,20 @@ function App() {
       status: false,
     },
   ];
+
+  // Setting up all the state variables
   const [tasks, setTasks] = useState(pre_tasks);
-  const [tasks_count, setTasksCount] = useState(tasks.length);
   const [newId, setNewId] = useState(tasks.length + 1);
+  const [tasks_count, setTasksCount] = useState(tasks.length);
   const [done_count, setDoneCount] = useState(0);
   const [undone, setPendingCount] = useState(tasks_count - done_count);
   const [editId, setEditId] = useState(0);
+
+  /*
+   * Prop drilled function to add task to the task list.
+   * This function is called when add button is called from HeaderPart Component
+   * via handleAdd prop method of the Header Component.
+   */
   const addItem = (item: string) => {
     if (item != "") {
       const newTask = {
@@ -37,12 +46,27 @@ function App() {
         task_name: item,
         status: false,
       };
+
+      /*
+       * setTask is a useState hook call back
+       * Here we have us a function update form of the call back function.
+       * When used functional update form of the useState callback,
+       * The parameters stores the previous value of the state.
+       * Here prevTasks stores the previous state of the task list and then append the new task to it
+       * with the spread operator.
+       */
       setTasks((prevTasks) => [...prevTasks, newTask]);
       setTasksCount(tasks_count + 1);
       setPendingCount(undone + 1);
       setNewId(newId + 1);
     }
   };
+
+  /*
+   * Since we have used prop drilling in the header part of the project,
+   * Here we have kept prop drilling to update the done and pending task count.
+   * This function is called from ActionComponent by drilling updateTask as prop.
+   */
   const updateTask = (checked: boolean) => {
     if (checked == true) {
       setDoneCount((prevDone) => prevDone + 1);
@@ -52,6 +76,12 @@ function App() {
       setPendingCount((prevPending) => prevPending + 1);
     }
   };
+
+  /*
+   * useEffect hook is used here to set all the count to zero when someone has deelted all the tasks from the list.
+   * The dependecy array is set to [tasks] which is why it runs whenever the task array changes.
+   * And set the header counter to zero when task length is zero.
+   */
   useEffect(() => {
     if (tasks.length == 0) {
       setDoneCount(0);
@@ -60,14 +90,25 @@ function App() {
       setNewId(1);
     }
   }, [tasks]);
+
+  /*
+   * This is another useEffect hook to run only on the init of the project.
+   * This is only for learning.
+   * It sets the the editId to zero so that the edit modal stay closed.
+   */
   useEffect(() => {
     setEditId(0);
   }, []);
+
+  /**
+   * Set up context object here to send multiple object as context.
+   * Need tasks for task Table component and editId to edit tasks from modal component.
+   * So send them as an object with key value pair.
+   */
   const contextValue = {
     tableValue: [tasks, setTasks],
     modalValue: [editId, setEditId],
   };
-  // console.log(contextValue.tableValue);
   return (
     <div className="to-do-wrapper bg-white">
       <Header
