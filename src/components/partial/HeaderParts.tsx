@@ -29,7 +29,7 @@ export const CreateComponent = ({ handleAdd }: CreateComponentProps) => {
     }
   };
   return (
-    <div className="flex flex-row items-center justify-center py-4 border-t-2">
+    <div className="mr-[12px]">
       <input
         className="border-zinc-400 border-[1px] h-[40px] px-[6px]"
         onChange={handleInputChange}
@@ -41,6 +41,17 @@ export const CreateComponent = ({ handleAdd }: CreateComponentProps) => {
       >
         Add Task
       </button>
+    </div>
+  );
+};
+
+export const SearchComponent = () => {
+  return (
+    <div className="ml-[12px]">
+      <input
+        placeholder="Search"
+        className="border-zinc-400 border-[1px] h-[40px] px-[6px]"
+      ></input>
     </div>
   );
 };

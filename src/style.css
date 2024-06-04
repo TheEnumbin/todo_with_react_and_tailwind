@@ -562,6 +562,10 @@ video {
   inset: 0px;
 }
 
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -574,12 +578,32 @@ video {
   margin-right: 0.5rem;
 }
 
+.ml-\[6px\] {
+  margin-left: 6px;
+}
+
+.mr-\[6px\] {
+  margin-right: 6px;
+}
+
+.ml-\[12px\] {
+  margin-left: 12px;
+}
+
+.mr-\[12px\] {
+  margin-right: 12px;
+}
+
 .flex {
   display: flex;
 }
 
 .table {
   display: table;
+}
+
+.grid {
+  display: grid;
 }
 
 .h-\[25px\] {
@@ -610,8 +634,16 @@ video {
   width: 100%;
 }
 
+.flex-1 {
+  flex: 1 1 0%;
+}
+
 .flex-row {
   flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: column;
 }
 
 .items-center {

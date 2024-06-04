@@ -3,6 +3,7 @@ import {
   DoneItems,
   Undone,
   CreateComponent,
+  SearchComponent,
 } from "./partial/HeaderParts";
 
 interface HeaderProps {
@@ -20,14 +21,16 @@ const Header = ({
 }: HeaderProps) => {
   // Prop drilling from First Child "Header" to Deeper Children with the Props
   return (
-    <div>
+    <div className="flex flex-col">
       <div className="text-black flex flex-row gap-3 items-center justify-between">
         <TotalItems number_of_tasks={number_of_tasks}></TotalItems>
         <DoneItems done_count={done_count}></DoneItems>
         <Undone undone={undone}></Undone>
       </div>
-
-      <CreateComponent handleAdd={handleAdd}></CreateComponent>
+      <div className="flex flex-row justify-between py-4 border-t-2">
+        <SearchComponent></SearchComponent>
+        <CreateComponent handleAdd={handleAdd}></CreateComponent>
+      </div>
     </div>
   );
 };
