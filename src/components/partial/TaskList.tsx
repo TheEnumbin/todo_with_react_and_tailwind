@@ -80,7 +80,7 @@ export const TaskList = ({ tasks, countUpdate }: TasklistProps) => {
     <>
       {tasks.length === 0 && <p className="text-center">No Item Found</p>}
       {tasks.map((task, index) => (
-        <tr key={index}>
+        <tr key={index} className={task.status ? "completed" : ""}>
           <td>{task.task_id}</td>
           <td>{task.task_name}</td>
           <td>done</td>

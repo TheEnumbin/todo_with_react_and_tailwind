@@ -7,3 +7,8 @@ td, th {
     text-align: left;
     padding: 8px;
 }
+
+.completed td {
+    /* text-decoration: line-through; */
+    color: gray;
+}
