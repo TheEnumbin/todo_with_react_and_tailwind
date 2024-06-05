@@ -45,12 +45,19 @@ export const CreateComponent = ({ handleAdd }: CreateComponentProps) => {
   );
 };
 
-export const SearchComponent = () => {
+export const SearchComponent = ({ runSearch }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+    runSearch(searchQuery);
+  };
+
   return (
     <div className="ml-[12px]">
       <input
         placeholder="Search"
         className="border-zinc-400 border-[1px] h-[40px] px-[6px]"
+        onChange={handleSearch}
       ></input>
     </div>
   );

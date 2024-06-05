@@ -11,6 +11,7 @@ interface HeaderProps {
   done_count: number;
   undone: number;
   handleAdd: (item: string) => void;
+  runSearch: (item: string) => void;
 }
 
 const Header = ({
@@ -18,6 +19,7 @@ const Header = ({
   done_count,
   undone,
   handleAdd,
+  runSearch,
 }: HeaderProps) => {
   // Prop drilling from First Child "Header" to Deeper Children with the Props
   return (
@@ -28,7 +30,7 @@ const Header = ({
         <Undone undone={undone}></Undone>
       </div>
       <div className="flex flex-row justify-between py-4 border-t-2">
-        <SearchComponent></SearchComponent>
+        <SearchComponent runSearch={runSearch}></SearchComponent>
         <CreateComponent handleAdd={handleAdd}></CreateComponent>
       </div>
     </div>
