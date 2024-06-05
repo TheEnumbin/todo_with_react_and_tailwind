@@ -101,7 +101,7 @@ function App() {
     setEditId(0);
   }, []);
 
-  const allTasks = useMemo(() => tasks, []);
+  const allTasks = useMemo(() => tasks, [tasks]);
 
   const runSearch = (q: string) => {
     setSearchQ(q);
