@@ -46,10 +46,8 @@ export const CreateComponent = ({ handleAdd }: CreateComponentProps) => {
 };
 
 export const SearchComponent = ({ runSearch }) => {
-  const [searchQuery, setSearchQuery] = useState("");
   const handleSearch = (event) => {
-    setSearchQuery(event.target.value);
-    runSearch(searchQuery);
+    runSearch(event.target.value);
   };
 
   return (
