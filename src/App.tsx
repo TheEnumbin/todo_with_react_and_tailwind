@@ -8,6 +8,12 @@ import "./style.css";
 
 function App() {
   // Default/Demo Task Array
+  useEffect(() => {
+    fetch("http://localhost:3001/tasks")
+      .then((response) => response.json())
+      .then((data) => setTasks(data))
+      .catch((error) => console.error("Error fetching tasks:", error));
+  }, []);
   let pre_tasks = [
     {
       task_id: 1,
