@@ -8,12 +8,8 @@ import "./style.css";
 
 function App() {
   // Default/Demo Task Array
-  useEffect(() => {
-    fetch("http://localhost:3001/tasks")
-      .then((response) => response.json())
-      .then((data) => setTasks(data))
-      .catch((error) => console.error("Error fetching tasks:", error));
-  }, []);
+
+  console.log();
   let pre_tasks = [
     {
       task_id: 1,
@@ -33,14 +29,24 @@ function App() {
   ];
 
   // Setting up all the state variables
-  const [tasks, setTasks] = useState(pre_tasks);
+  const [tasks, setTasks] = useState([]);
   const [newId, setNewId] = useState(tasks.length + 1);
   const [tasks_count, setTasksCount] = useState(tasks.length);
   const [done_count, setDoneCount] = useState(0);
   const [undone, setPendingCount] = useState(tasks_count - done_count);
   const [editId, setEditId] = useState(0);
   const [searchQ, setSearchQ] = useState("");
+  console.log(pre_tasks);
 
+  useEffect(() => {
+    fetch("http://localhost:3001/api/tasks")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setTasks(data);
+      })
+      .catch((error) => console.error("Error fetching tasks:", error));
+  }, []);
   /*
    * Prop drilled function to add task to the task list.
    * This function is called when add button is called from HeaderPart Component
