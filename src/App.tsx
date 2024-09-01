@@ -68,6 +68,18 @@ function App() {
        * Here prevTasks stores the previous state of the task list and then append the new task to it
        * with the spread operator.
        */
+      fetch("http://localhost:3001/api/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTask),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Task added:", data);
+        })
+        .catch((error) => console.error("Error adding task:", error));
       setTasks((prevTasks) => [...prevTasks, newTask]);
       setTasksCount(tasks_count + 1);
       setPendingCount(undone + 1);
