@@ -9,7 +9,6 @@ import "./style.css";
 function App() {
   // Default/Demo Task Array
 
-  console.log();
   let pre_tasks = [
     {
       task_id: 1,
@@ -42,7 +41,6 @@ function App() {
     fetch("http://localhost:3001/api/tasks")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setTasks(data);
       })
       .catch((error) => console.error("Error fetching tasks:", error));
