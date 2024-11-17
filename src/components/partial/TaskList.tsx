@@ -78,7 +78,11 @@ export const TaskList = ({ tasks, countUpdate }: TasklistProps) => {
   console.log(tasks);
   return (
     <>
-      {tasks.length === 0 && <p className="text-center">No Item Found</p>}
+      {tasks.length === 0 && (
+        <tr className="text-center">
+          <td>No Item Found</td>
+        </tr>
+      )}
       {tasks.map((task, index) => (
         <tr key={index} className={task.status ? "completed" : ""}>
           <td>{task.task_id}</td>

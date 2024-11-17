@@ -35,12 +35,12 @@ function App() {
   const [undone, setPendingCount] = useState(tasks_count - done_count);
   const [editId, setEditId] = useState(0);
   const [searchQ, setSearchQ] = useState("");
-  console.log(pre_tasks);
 
   useEffect(() => {
     fetch("http://localhost:3001/api/tasks")
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setTasks(data);
       })
       .catch((error) => console.error("Error fetching tasks:", error));
