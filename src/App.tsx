@@ -71,13 +71,18 @@ function App() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newTask),
+        body: JSON.stringify({
+          task_name: "My Task",
+          task_status: "pending",
+        }),
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Task added:", data);
+          console.log("Task inserted successfully:", data);
         })
-        .catch((error) => console.error("Error adding task:", error));
+        .catch((error) => {
+          console.error("Error inserting task:", error);
+        });
       setTasks((prevTasks) => [...prevTasks, newTask]);
       setTasksCount(tasks_count + 1);
       setPendingCount(undone + 1);
