@@ -71,18 +71,30 @@ function App() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          task_name: "My Task",
-          task_status: "pending",
-        }),
+        body: JSON.stringify(newTask),
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Task inserted successfully:", data);
+          console.log("Task added:", data);
         })
-        .catch((error) => {
-          console.error("Error inserting task:", error);
-        });
+        .catch((error) => console.error("Error adding task:", error));
+      // fetch("http://localhost:3001/api/tasks", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     task_name: "My Task",
+      //     task_status: "pending",
+      //   }),
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log("Task inserted successfully:", data);
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error inserting task:", error);
+      //   });
       setTasks((prevTasks) => [...prevTasks, newTask]);
       setTasksCount(tasks_count + 1);
       setPendingCount(undone + 1);
