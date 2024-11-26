@@ -34,6 +34,18 @@ export const ActionComponent = ({
   };
   const deleteClickHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this item?") == true) {
+      const deletableTask = {
+        task_id: id,
+      };
+      fetch("http://localhost:3001/api/tasks", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(deletableTask),
+      })
+        .then((response) => response.json())
+        .catch((error) => console.error("Error adding task:", error));
       setTasks((prevTasks) => prevTasks.filter((task) => task.task_id !== id));
     }
   };
@@ -75,7 +87,6 @@ interface TasklistProps {
 }
 
 export const TaskList = ({ tasks, countUpdate }: TasklistProps) => {
-  console.log(tasks);
   return (
     <>
       {tasks.length === 0 && (

@@ -40,7 +40,6 @@ function App() {
     fetch("http://localhost:3001/api/tasks")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setTasks(data);
       })
       .catch((error) => console.error("Error fetching tasks:", error));
@@ -55,9 +54,8 @@ function App() {
       const newTask = {
         task_id: newId,
         task_name: item,
-        status: false,
+        status: 0,
       };
-
       /*
        * setTask is a useState hook call back
        * Here we have us a function update form of the call back function.
@@ -74,27 +72,7 @@ function App() {
         body: JSON.stringify(newTask),
       })
         .then((response) => response.json())
-        .then((data) => {
-          console.log("Task added:", data);
-        })
         .catch((error) => console.error("Error adding task:", error));
-      // fetch("http://localhost:3001/api/tasks", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     task_name: "My Task",
-      //     task_status: "pending",
-      //   }),
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     console.log("Task inserted successfully:", data);
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error inserting task:", error);
-      //   });
       setTasks((prevTasks) => [...prevTasks, newTask]);
       setTasksCount(tasks_count + 1);
       setPendingCount(undone + 1);
