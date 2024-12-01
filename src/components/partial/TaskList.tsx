@@ -32,21 +32,25 @@ export const ActionComponent = ({
       );
     }
   };
-  const deleteClickHandler = (id) => {
+  const deleteClickHandler = async (id) => {
     if (window.confirm("Are you sure you want to delete this item?") == true) {
-      const deletableTask = {
-        task_id: id,
-      };
-      fetch("http://localhost:3001/api/tasks", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(deletableTask),
-      })
-        .then((response) => response.json())
-        .catch((error) => console.error("Error adding task:", error));
-      setTasks((prevTasks) => prevTasks.filter((task) => task.task_id !== id));
+      try {
+        const response = await fetch(`http://localhost:3001/api/tasks/${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          // Remove the task from the UI after successful deletion
+          setTasks((prevTasks) =>
+            prevTasks.filter((task) => task.task_id !== id)
+          );
+        } else {
+          const errorText = await response.text();
+          console.error(`Error deleting task: ${errorText}`);
+        }
+      } catch (err) {
+        console.error(`Error deleting task: ${err.message}`);
+      }
     }
   };
   const editClickHandler = (id) => {
