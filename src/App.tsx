@@ -87,6 +87,15 @@ function App() {
    */
   const updateTask = (checked: boolean) => {
     if (checked == true) {
+      fetch("http://localhost:3001/api/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTask),
+      })
+        .then((response) => response.json())
+        .catch((error) => console.error("Error adding task:", error));
       setDoneCount((prevDone) => prevDone + 1);
       setPendingCount((prevPending) => prevPending - 1);
     } else {
