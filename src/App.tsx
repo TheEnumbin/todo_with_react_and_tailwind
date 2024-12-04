@@ -87,8 +87,8 @@ function App() {
    */
   const updateTask = (checked: boolean) => {
     if (checked == true) {
-      fetch("http://localhost:3001/api/tasks", {
-        method: "POST",
+      fetch(`http://localhost:3001/api/tasks/${id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
