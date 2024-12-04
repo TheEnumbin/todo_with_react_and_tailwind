@@ -17,14 +17,14 @@ export const ActionComponent = ({
   const [editId, setEditId] = modalValue;
   const checkHandler = (event, id) => {
     if (event.target.checked == true) {
-      updateStatus(event.target.checked);
+      updateStatus(event.target.checked, id);
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
           task.task_id === id ? { ...task, status: true } : task
         )
       );
     } else {
-      updateStatus(event.target.checked);
+      updateStatus(event.target.checked, id);
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
           task.task_id === id ? { ...task, status: false } : task
@@ -87,10 +87,10 @@ export const ActionComponent = ({
 
 interface TasklistProps {
   tasks: [];
-  countUpdate: (checked: boolean) => void;
+  updateStatus: (checked: boolean) => void;
 }
 
-export const TaskList = ({ tasks, countUpdate }: TasklistProps) => {
+export const TaskList = ({ tasks, updateStatus }: TasklistProps) => {
   return (
     <>
       {tasks.length === 0 && (
@@ -107,7 +107,7 @@ export const TaskList = ({ tasks, countUpdate }: TasklistProps) => {
             <ActionComponent
               task_id={task.task_id}
               preChecked={task.status}
-              updateStatus={countUpdate}
+              updateStatus={updateStatus}
             ></ActionComponent>
           </td>
         </tr>

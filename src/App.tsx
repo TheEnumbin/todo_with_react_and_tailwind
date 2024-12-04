@@ -85,23 +85,33 @@ function App() {
    * Here we have kept prop drilling to update the done and pending task count.
    * This function is called from ActionComponent by drilling updateTask as prop.
    */
-  const updateTask = (checked: boolean) => {
-    if (checked == true) {
-      fetch(`http://localhost:3001/api/tasks/${id}`, {
-        method: "PUT",
+  const updateStatus = async (checked: boolean, id: number) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/tasks/${taskId}`, {
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newTask),
-      })
-        .then((response) => response.json())
-        .catch((error) => console.error("Error adding task:", error));
-      setDoneCount((prevDone) => prevDone + 1);
-      setPendingCount((prevPending) => prevPending - 1);
-    } else {
-      setDoneCount((prevDone) => prevDone - 1);
-      setPendingCount((prevPending) => prevPending + 1);
+        body: JSON.stringify({ status: checked, task_id: id }),
+      });
+
+      if (response.ok) {
+        // Update the task in the state after successful status update
+        if (checked == true) {
+          setDoneCount((prevDone) => prevDone + 1);
+          setPendingCount((prevPending) => prevPending - 1);
+        } else {
+          setDoneCount((prevDone) => prevDone - 1);
+          setPendingCount((prevPending) => prevPending + 1);
+        }
+      } else {
+        const errorText = await response.text();
+        console.error(`Error updating task: ${errorText}`);
+      }
+    } catch (err) {
+      console.error(`Error updating task: ${err.message}`);
     }
+  };
   };
 
   /*
@@ -158,7 +168,7 @@ function App() {
       ></Header>
       <TableContext.Provider value={contextValue}>
         {/* Here only the context is wrapped around the table since context change will re render the table */}
-        <Table tasks={filteredTasks} countUpdate={updateTask}></Table>
+        <Table tasks={filteredTasks} updateStatus={updateStatus}></Table>
         <EditModal></EditModal>
       </TableContext.Provider>
     </div>
