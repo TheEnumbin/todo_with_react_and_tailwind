@@ -87,16 +87,13 @@ function App() {
    */
   const updateStatus = async (checked: boolean, id: number) => {
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/tasks/${taskId}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ status: checked, task_id: id }),
-        }
-      );
+      const response = await fetch(`http://localhost:3001/api/tasks/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: checked }),
+      });
 
       if (response.ok) {
         // Update the task in the state after successful status update
