@@ -9,13 +9,33 @@ const EditModal = () => {
   const handleInputChange = (value) => {
     setEditedName(value);
   };
-  const updateTask = () => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.task_id === editId ? { ...task, task_name: editedName } : task
-      )
-    );
-    setEditId(0);
+  const updateTask = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/tasks/${editId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ task_name: editedName }),
+        }
+      );
+
+      if (response.ok) {
+        setTasks((prevTasks) =>
+          prevTasks.map((task) =>
+            task.task_id === editId ? { ...task, task_name: editedName } : task
+          )
+        );
+        setEditId(0);
+      } else {
+        const errorText = await response.text();
+        console.error(`Error updating task: ${errorText}`);
+      }
+    } catch (err) {
+      console.error(`Error updating task: ${err.message}`);
+    }
   };
 
   if (editId == 0) {
@@ -40,6 +60,7 @@ const EditModal = () => {
             Cancel
           </button>
           <button
+            id="dadasd"
             onClick={updateTask}
             className="bg-blue-500 text-white px-4 py-2 rounded"
           >
