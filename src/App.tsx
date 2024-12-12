@@ -40,6 +40,9 @@ function App() {
     fetch("http://localhost:3001/api/tasks")
       .then((response) => response.json())
       .then((data) => {
+        setTasksCount(data.length);
+        setDoneCount(data.filter((obj) => obj.status === 1).length);
+        setPendingCount(data.filter((obj) => obj.status === 0).length);
         setTasks(data);
       })
       .catch((error) => console.error("Error fetching tasks:", error));
