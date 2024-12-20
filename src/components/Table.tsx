@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { TaskList } from "./partial/TaskList";
-
+import {
+  DndContext,
+  closestCenter,
+  useSortable,
+  arrayMove,
+} from "@dnd-kit/core";
 interface TableProps {
   tasks;
   updateStatus: (checked: boolean) => void;
@@ -16,7 +21,9 @@ const Table = ({ tasks, updateStatus }: TableProps) => {
           <th>Status</th>
           <th>Action</th>
         </tr>
-        <TaskList tasks={tasks} updateStatus={updateStatus}></TaskList>
+        <DndContext>
+          <TaskList tasks={tasks} updateStatus={updateStatus}></TaskList>
+        </DndContext>
       </tbody>
     </table>
   );

@@ -1,5 +1,9 @@
 import { useContext } from "react";
 import { TableContext } from "../../globals/AllContext";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 interface ActionComponentProps {
   task_id: number;
