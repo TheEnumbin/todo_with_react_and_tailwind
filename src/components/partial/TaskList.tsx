@@ -1,9 +1,6 @@
 import { useContext } from "react";
 import { TableContext } from "../../globals/AllContext";
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
+import { useSortable, arrayMove } from "@dnd-kit/sortable";
 
 interface ActionComponentProps {
   task_id: number;
@@ -103,19 +100,45 @@ export const TaskList = ({ tasks, updateStatus }: TasklistProps) => {
         </tr>
       )}
       {tasks.map((task, index) => (
-        <tr key={index} className={task.status ? "completed" : ""}>
-          <td>{task.task_id}</td>
-          <td>{task.task_name}</td>
-          <td>done</td>
-          <td>
-            <ActionComponent
-              task_id={task.task_id}
-              preChecked={task.status}
-              updateStatus={updateStatus}
-            ></ActionComponent>
-          </td>
-        </tr>
+        <SortableRow
+          key={task.task_id}
+          task={task}
+          updateStatus={updateStatus}
+        />
       ))}
     </>
+  );
+};
+
+const SortableRow = ({ task, updateStatus }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: task.task_id });
+
+  const style = {
+    transform: transform
+      ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+      : undefined,
+    transition,
+  };
+
+  return (
+    <tr
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className={task.status ? "completed" : ""}
+    >
+      <td>{task.task_id}</td>
+      <td>{task.task_name}</td>
+      <td>{task.status ? "Completed" : "Pending"}</td>
+      <td>
+        <ActionComponent
+          task_id={task.task_id}
+          preChecked={task.status}
+          updateStatus={updateStatus}
+        ></ActionComponent>
+      </td>
+    </tr>
   );
 };

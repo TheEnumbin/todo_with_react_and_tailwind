@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { TaskList } from "./partial/TaskList";
+import { DndContext } from "@dnd-kit/core";
 import {
-  DndContext,
-  closestCenter,
-  useSortable,
-  arrayMove,
-} from "@dnd-kit/core";
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 interface TableProps {
   tasks;
   updateStatus: (checked: boolean) => void;
@@ -22,7 +21,9 @@ const Table = ({ tasks, updateStatus }: TableProps) => {
           <th>Action</th>
         </tr>
         <DndContext>
-          <TaskList tasks={tasks} updateStatus={updateStatus}></TaskList>
+          <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
+            <TaskList tasks={tasks} updateStatus={updateStatus}></TaskList>
+          </SortableContext>
         </DndContext>
       </tbody>
     </table>
