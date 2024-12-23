@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { TableContext } from "../../globals/AllContext";
-import { useSortable, arrayMove } from "@dnd-kit/sortable";
+import { useSortable } from "@dnd-kit/sortable";
 
 interface ActionComponentProps {
   task_id: number;

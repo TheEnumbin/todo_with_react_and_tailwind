@@ -5,6 +5,12 @@ import { TableContext } from "./globals/AllContext";
 import Table from "./components/Table";
 import "./App.css";
 import "./style.css";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove,
+} from "@dnd-kit/sortable";
 
 function App() {
   // Default/Demo Task Array
@@ -158,6 +164,21 @@ function App() {
     tableValue: [filteredTasks, setTasks],
     modalValue: [editId, setEditId],
   };
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+    console.log(active);
+    console.log(over);
+    if (active.id !== over.id) {
+      setTasks((items) => {
+        const oldIndex = items.findIndex((item) => item.task_id === active.id);
+        const newIndex = items.findIndex((item) => item.task_id === over.id);
+        console.log(oldIndex);
+        console.log(newIndex);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
   return (
     <div className="to-do-wrapper bg-white">
       <Header
@@ -168,11 +189,15 @@ function App() {
         handleAdd={addItem}
         runSearch={runSearch}
       ></Header>
-      <TableContext.Provider value={contextValue}>
-        {/* Here only the context is wrapped around the table since context change will re render the table */}
-        <Table tasks={filteredTasks} updateStatus={updateStatus}></Table>
-        <EditModal></EditModal>
-      </TableContext.Provider>
+      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
+          <TableContext.Provider value={contextValue}>
+            {/* Here only the context is wrapped around the table since context change will re render the table */}
+            <Table tasks={filteredTasks} updateStatus={updateStatus}></Table>
+            <EditModal></EditModal>
+          </TableContext.Provider>
+        </SortableContext>
+      </DndContext>
     </div>
   );
 }
