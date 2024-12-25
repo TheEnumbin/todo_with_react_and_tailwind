@@ -1,1 +1,12 @@
+tr {
+  transition: transform 200ms ease;
+}
 
+tr.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+tr:active {
+  background: #f4f4f4;
+}
