@@ -34,7 +34,7 @@ function App() {
   ];
 
   // Setting up all the state variables
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(pre_tasks);
   const [newId, setNewId] = useState(tasks.length + 1);
   const [tasks_count, setTasksCount] = useState(tasks.length);
   const [done_count, setDoneCount] = useState(0);

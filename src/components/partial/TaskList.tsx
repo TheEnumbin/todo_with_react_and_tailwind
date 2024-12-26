@@ -122,23 +122,42 @@ const SortableRow = ({ task, updateStatus }) => {
   };
 
   return (
-    <tr
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-      className={task.status ? "completed" : ""}
-    >
-      <td>{task.task_id}</td>
-      <td>{task.task_name}</td>
-      <td>{task.status ? "Completed" : "Pending"}</td>
-      <td>
-        <ActionComponent
-          task_id={task.task_id}
-          preChecked={task.status}
-          updateStatus={updateStatus}
-        ></ActionComponent>
-      </td>
-    </tr>
+    <SortableItem key={task.task_id} id={task.task_id}>
+      <tr
+        ref={setNodeRef}
+        style={style}
+        {...attributes}
+        {...listeners}
+        className={task.status ? "completed" : ""}
+      >
+        <td>{task.task_id}</td>
+
+        <td>{task.task_name}</td>
+        <td>{task.status ? "Completed" : "Pending"}</td>
+        <td>
+          <ActionComponent
+            task_id={task.task_id}
+            preChecked={task.status}
+            updateStatus={updateStatus}
+          ></ActionComponent>
+        </td>
+      </tr>
+    </SortableItem>
+  );
+};
+
+const SortableItem = ({ id, children }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      {children}
+    </div>
   );
 };
