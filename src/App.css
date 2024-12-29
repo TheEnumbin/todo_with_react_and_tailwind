@@ -10,3 +10,17 @@ tr.completed {
 tr:active {
   background: #f4f4f4;
 }
+
+.draggable-item {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  transition: transform 150ms ease;
+  cursor: grab;
+}
+
+.draggable-item:hover {
+  background-color: #e0f7fa;
+}

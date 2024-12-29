@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { TableContext } from "../../globals/AllContext";
 import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 interface ActionComponentProps {
   task_id: number;
@@ -111,53 +112,46 @@ export const TaskList = ({ tasks, updateStatus }: TasklistProps) => {
 };
 
 const SortableRow = ({ task, updateStatus }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: task.task_id });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: task.task_id });
 
   const style = {
-    transform: transform
-      ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
-      : undefined,
-    transition,
+    transform: CSS.Transform.toString(transform), // Apply transformations for smooth drag
+    transition: transition || "transform 150ms ease", // Default animation duration
+    padding: "10px",
+    border: "1px solid #ddd",
+    borderRadius: "5px",
+    backgroundColor: isDragging ? "#e0f7fa" : "#f9f9f9", // Change color while dragging
+    marginBottom: "10px",
+    cursor: "grab",
+    opacity: isDragging ? 0.8 : 1, // Add opacity effect while dragging
+    boxShadow: isDragging ? "0px 4px 6px rgba(0, 0, 0, 0.1)" : "none", // Add shadow while dragging
   };
 
   return (
-    <SortableItem key={task.task_id} id={task.task_id}>
-      <tr
-        ref={setNodeRef}
-        style={style}
-        {...attributes}
-        {...listeners}
-        className={task.status ? "completed" : ""}
-      >
-        <td>{task.task_id}</td>
-
-        <td>{task.task_name}</td>
-        <td>{task.status ? "Completed" : "Pending"}</td>
-        <td>
-          <ActionComponent
-            task_id={task.task_id}
-            preChecked={task.status}
-            updateStatus={updateStatus}
-          ></ActionComponent>
-        </td>
-      </tr>
-    </SortableItem>
-  );
-};
-
-const SortableItem = ({ id, children }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
-
-  return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      {children}
-    </div>
+    <tr
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className={task.status ? "completed" : ""}
+    >
+      <td>{task.task_id}</td>
+      <td>{task.task_name}</td>
+      <td>{task.status ? "Completed" : "Pending"}</td>
+      <td>
+        <ActionComponent
+          task_id={task.task_id}
+          preChecked={task.status}
+          updateStatus={updateStatus}
+        ></ActionComponent>
+      </td>
+    </tr>
   );
 };
