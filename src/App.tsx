@@ -34,7 +34,7 @@ function App() {
   ];
 
   // Setting up all the state variables
-  const [tasks, setTasks] = useState(pre_tasks);
+  const [tasks, setTasks] = useState([]);
   const [newId, setNewId] = useState(tasks.length + 1);
   const [tasks_count, setTasksCount] = useState(tasks.length);
   const [done_count, setDoneCount] = useState(0);
@@ -165,6 +165,34 @@ function App() {
     modalValue: [editId, setEditId],
   };
 
+  const updatePosition = async (checked: boolean, id: number) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/tasks/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: checked }),
+      });
+
+      if (response.ok) {
+        // Update the task in the state after successful status update
+        if (checked == true) {
+          setDoneCount((prevDone) => prevDone + 1);
+          setPendingCount((prevPending) => prevPending - 1);
+        } else {
+          setDoneCount((prevDone) => prevDone - 1);
+          setPendingCount((prevPending) => prevPending + 1);
+        }
+      } else {
+        const errorText = await response.text();
+        console.error(`Error updating task: ${errorText}`);
+      }
+    } catch (err) {
+      console.error(`Error updating task: ${err.message}`);
+    }
+  };
+
   const handleDragEnd = (event) => {
     const { active, over } = event;
     console.log(active);
@@ -175,6 +203,7 @@ function App() {
         const newIndex = items.findIndex((item) => item.task_id === over.id);
         console.log(oldIndex);
         console.log(newIndex);
+        updatePosition(newIndex);
         return arrayMove(items, oldIndex, newIndex);
       });
     }
