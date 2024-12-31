@@ -34,7 +34,7 @@ function App() {
   ];
 
   // Setting up all the state variables
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(pre_tasks);
   const [newId, setNewId] = useState(tasks.length + 1);
   const [tasks_count, setTasksCount] = useState(tasks.length);
   const [done_count, setDoneCount] = useState(0);
@@ -201,9 +201,11 @@ function App() {
       setTasks((items) => {
         const oldIndex = items.findIndex((item) => item.task_id === active.id);
         const newIndex = items.findIndex((item) => item.task_id === over.id);
-        console.log(oldIndex);
-        console.log(newIndex);
-        updatePosition(newIndex);
+        console.log("which id : " + active.id);
+        console.log("Old Position : " + oldIndex);
+        console.log("Over which : " + over.id);
+        console.log("New Position : " + newIndex);
+        // updatePosition(newIndex);
         return arrayMove(items, oldIndex, newIndex);
       });
     }
