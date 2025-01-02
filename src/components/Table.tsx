@@ -14,6 +14,7 @@ const Table = ({ tasks, updateStatus }: TableProps) => {
           <th className="w-[10%]">Task Id</th>
           <th>Task Name</th>
           <th>Status</th>
+          <th>Position</th>
           <th>Action</th>
         </tr>
 

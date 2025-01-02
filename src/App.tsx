@@ -20,16 +20,19 @@ function App() {
       task_id: 1,
       task_name: "Task 1",
       status: false,
+      position: 1,
     },
     {
       task_id: 2,
       task_name: "Task 2",
       status: false,
+      position: 2,
     },
     {
       task_id: 3,
       task_name: "Task 3",
       status: false,
+      position: 3,
     },
   ];
 

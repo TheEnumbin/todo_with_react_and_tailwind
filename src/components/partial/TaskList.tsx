@@ -93,6 +93,7 @@ interface TasklistProps {
 }
 
 export const TaskList = ({ tasks, updateStatus }: TasklistProps) => {
+  console.log(tasks);
   return (
     <>
       {tasks.length === 0 && (
@@ -145,6 +146,7 @@ const SortableRow = ({ task, updateStatus }) => {
       <td>{task.task_id}</td>
       <td>{task.task_name}</td>
       <td>{task.status ? "Completed" : "Pending"}</td>
+      <td>{task.position}</td>
       <td>
         <ActionComponent
           task_id={task.task_id}
