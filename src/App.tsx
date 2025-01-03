@@ -37,7 +37,7 @@ function App() {
   ];
 
   // Setting up all the state variables
-  const [tasks, setTasks] = useState(pre_tasks);
+  const [tasks, setTasks] = useState();
   const [newId, setNewId] = useState(tasks.length + 1);
   const [tasks_count, setTasksCount] = useState(tasks.length);
   const [done_count, setDoneCount] = useState(0);
@@ -168,31 +168,28 @@ function App() {
     modalValue: [editId, setEditId],
   };
 
-  const updatePosition = async (checked: boolean, id: number) => {
+  const updateTaskPositions = async (updatedTasks) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/tasks/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status: checked }),
-      });
+      const response = await fetch(
+        "http://localhost:3001/api/tasks/updatePositions",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ tasks: updatedTasks }), // Send the updated tasks array
+        }
+      );
 
       if (response.ok) {
-        // Update the task in the state after successful status update
-        if (checked == true) {
-          setDoneCount((prevDone) => prevDone + 1);
-          setPendingCount((prevPending) => prevPending - 1);
-        } else {
-          setDoneCount((prevDone) => prevDone - 1);
-          setPendingCount((prevPending) => prevPending + 1);
-        }
+        const data = await response.json();
+        console.log("Task positions updated successfully:", data);
       } else {
         const errorText = await response.text();
-        console.error(`Error updating task: ${errorText}`);
+        console.error(`Error updating task positions: ${errorText}`);
       }
     } catch (err) {
-      console.error(`Error updating task: ${err.message}`);
+      console.error(`Error: ${err.message}`);
     }
   };
 
@@ -207,11 +204,12 @@ function App() {
       const updatedTasks = arrayMove(tasks, oldIndex, newIndex).map(
         (task, index) => ({
           ...task,
-          position: index + 1, // Update the position property
+          position: index + 1,
         })
       );
 
       setTasks(updatedTasks);
+      updateTaskPositions(updatedTasks);
     }
   };
   return (
