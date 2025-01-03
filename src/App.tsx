@@ -201,16 +201,17 @@ function App() {
     console.log(active);
     console.log(over);
     if (active.id !== over.id) {
-      setTasks((items) => {
-        const oldIndex = items.findIndex((item) => item.task_id === active.id);
-        const newIndex = items.findIndex((item) => item.task_id === over.id);
-        console.log("which id : " + active.id);
-        console.log("Old Position : " + oldIndex);
-        console.log("Over which : " + over.id);
-        console.log("New Position : " + newIndex);
-        // updatePosition(newIndex);
-        return arrayMove(items, oldIndex, newIndex);
-      });
+      const oldIndex = tasks.findIndex((task) => task.task_id === active.id);
+      const newIndex = tasks.findIndex((task) => task.task_id === over.id);
+
+      const updatedTasks = arrayMove(tasks, oldIndex, newIndex).map(
+        (task, index) => ({
+          ...task,
+          position: index + 1, // Update the position property
+        })
+      );
+
+      setTasks(updatedTasks);
     }
   };
   return (
